@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MvcSeriesRepaso.Models.Serie>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="mb-4">Series</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary mb-4">Crear nueva serie</a>
+</p>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <img src="@item.Imagen" class="card-img-top" alt="Imagen de @item.Nombre">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Nombre (@item.Anyo)</h5>
+                    <p class="card-text">ID: @item.IdSerie</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <td class="d-flex gap-2">
+                        <a asp-action="Edit" asp-route-id="@item.IdSerie" class="btn btn-warning btn-sm">Editar</a>
+                        <a asp-action="Details" asp-route-id="@item.IdSerie" class="btn btn-info btn-sm">Detalles</a>
+
+                        <form asp-action="Delete" asp-route-id="@item.IdSerie" method="post" onsubmit="return confirm('¿Seguro que deseas eliminar esta serie?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
+                </div>
+            </div>
+        </div>
+    }
+</div>
